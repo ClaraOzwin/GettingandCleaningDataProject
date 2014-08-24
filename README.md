@@ -2,7 +2,7 @@ GettingandCleaningDataProject
 =============================
 
 Repository for the course project for the Getting and Cleaning Data course in the John's Hopkins Data Science specialization.  
-It contains the following files:  
+This repository contains the following files:  
 
 * **README.md**     
 
