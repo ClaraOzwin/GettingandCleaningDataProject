@@ -1,9 +1,9 @@
 # run_analysis.R
 # Course Project for Getting and Cleaning Data course
-# Uses teh Human Activity Recognition Using Smartphones Dataset
+# Uses the Human Activity Recognition Using Smartphones Dataset
 # Creates a tidy data set from data collected from accelerometers from the Samsung Galaxy smartphone.
 # The dataset used in this code is from the following source:
-# [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+# Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
 # Step 1. Merge the training and test sets into one data set
 # Read the data
@@ -20,7 +20,7 @@ activities.train <-  read.table("train/y_train.txt")
 
 # Merge the training and the test sets to create one data set
 # add a column for the subjects and one for the activity labels
-# for the merge, make sure the column names are unique for subjects and activity
+# rename the column names for subjects and activity so they are unique for the merge
 colnames(subjects.test) <- "subjects"
 colnames(activities.test) <- "activity.numcode"
 colnames(subjects.train) <- "subjects"
@@ -49,10 +49,14 @@ colnames(ds)[563] <- "activity"
 
 # Extract the measurements on the mean and standard deviation for each measurement
 # by selecting only columns that include "mean" or "std" in their title
-# and subsetting based on those columns (this is Step 2 in the project instructions)
+# and subsetting based on those columns. This is Step 2 in the project instructions.
+
+# This version includes all instances of mean and std in the variable name (86 names). 
+# A shorter list can be obtained by limiting the grep to just [Mm]ean() and [Ss]td() but 
+# based on this thread it seems that there is no definitive answer and we can choose
+# https://class.coursera.org/getdata-006/forum/thread?thread_id=248
 meanstd <- grep('mean*|std*',variable.names$V2, ignore.case=TRUE, value=TRUE)
-meanstd.vars <- variable.names[variable.names$V2 %in%  meanstd,]
-mean.std.measures <- ds[ds$activity %in% meanstd.vars,]
+mean.std.measures <- ds[, colnames(ds) %in% meanstd]
 
 # Create a second, independent tidy data set with the average of each variable for each activity and each subject. 
 # This is Step 5 in the project instructions

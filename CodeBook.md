@@ -27,8 +27,13 @@ Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ort
 * subject_train.txt     : subject identifiers (1-30) for X_train.txt : a 7352x1 vector
 * subject_test.txt      : subject identifiers (1-30) for X_test.txt : a 2497x1 vector
 
-The zip file includes a README.txt which provides more detail about the data. This codebook describes just the portions used for this course project.   
-This image from David's Course Project FAQ (https://class.coursera.org/getdata-006/forum/thread?thread_id=43) shows how these files fit together:
+The zip file includes a README.txt which provides more detail about the data. This codebook describes just the portions used for this course project.  
+
+The existing data are divided in a test and train set. The data in each set are distributed as observatsions of 561 measured variables for each subject (X_test.txt and X_train.txt); subject labels (subject_test.txt and subject.train.txt); and activity codes for the activities performed (y_test.txt and y_train.txt). To create one data set, I added the subjects and activity codes as columns to the X_test.txt and X_train.txt sets, respectively. I then merged the test and train sets into one data set of 10299 (7352+2497) rows x 561 columns.
+
+I replaced the original column names of V1, V2, ... V561, with the descriptive variable names from features.txt. I also added a column of descriptive activity names from activity_labels.txt.   
+
+This image from David Hood in his David's Course Project FAQ (https://class.coursera.org/getdata-006/forum/thread?thread_id=43) shows how these files fit together. 
 
 ![alt How the data files fit together](dataconfig.png)
 
