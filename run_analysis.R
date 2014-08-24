@@ -66,11 +66,11 @@ library(plyr)
 library(reshape2)
 # get the subject labels and activity names for the id.vars in the melt function
 subjects <- unique(ds$subjects)
-activities <- unique(ds$activity)
+activity <- unique(ds$activity)
 
 # reshape the data to get a df that has rows for each subject(30) with each activity (6) = 180
 melted <- melt(ds, id.vars=c("subjects", "activity"))
-tidy <- ddply(melted, c("activity", "subjects"), summarise, mean = mean(value))
+tidyData <- ddply(melted, c("activity", "subjects"), summarise, mean = mean(value))
 
 # make a .txt file with write.table() and set the option to NOT write the line numbers
 write.table(tidyData,"tidyData.txt", row.names=FALSE)
